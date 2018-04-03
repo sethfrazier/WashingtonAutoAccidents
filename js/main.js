@@ -4,6 +4,33 @@
     //variables for data join
     var attrArray = ["total_collisions", "pct_WaTotal", "pct_fatal", "pct_serious", "pct_minor","pct_property", "pct_unknown", "Col_per_licDR", "fatal_perLicDr", "serious_injry_perLicDr" ];
     
+    var attrName = {
+        total_collisions: "Total Collisions",
+        pct_WaTotal: "County percentage of State", 
+        pct_fatal: "Percent Fatal", 
+        pct_serious: "Percent Serious Injury",
+        pct_minor: "Percent Minor Injury",
+        pct_property: "Percent Property",
+        pct_unknown: "Percent Unknown",
+        Col_per_licDR: "Collision Rate",
+        fatal_perLicDr: "Fatality Rate",
+        serious_injry_perLicDr: "Serious Injury Rate"
+    }
+    
+    var attrDesc = {
+        total_collisions: "Total Collisions per County",
+        pct_WaTotal: "County percentage of State Total Collisions", 
+        pct_fatal: "Percentage of Fatal Collisions per County", 
+        pct_serious: "Percentage of Serious Injury Collisions per County",
+        pct_minor: "Percentage of Minor Injury Collisions per County",
+        pct_property: "Percentage of Property Damage Only per County",
+        pct_unknown: "Percentage of Unknown Injury Collisions per County",
+        Col_per_licDR: "Collision Rate per 10,000 licensed drivers",
+        fatal_perLicDr: "Fatality Rate per 10,000 licensed drivers",
+        serious_injry_perLicDr: "Serious Injury Rate per 10,000 licensed drivers"
+    }
+    
+    
     var expressed = attrArray[7]; //initial attribute
     
     //chart frame dimensions
@@ -262,7 +289,7 @@
             .enter()
             .append("option")
             .attr("value", function(d){ return d })
-            .text(function(d){ return d });
+            .text(function(d){ return attrName[d]});
     };
     
     //dropdown change listener handler
