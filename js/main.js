@@ -18,13 +18,13 @@
     }
     
     var attrDesc = {
-        total_collisions: "Total Collisions per County",
+        total_collisions: "Total Collisions by County",
         pct_WaTotal: "County percentage of State Total Collisions", 
-        pct_fatal: "Percentage of Fatal Collisions per County", 
-        pct_serious: "Percentage of Serious Injury Collisions per County",
-        pct_minor: "Percentage of Minor Injury Collisions per County",
-        pct_property: "Percentage of Property Damage Only per County",
-        pct_unknown: "Percentage of Unknown Injury Collisions per County",
+        pct_fatal: "Fatal Collisions (%) by County", 
+        pct_serious: "Serious Injury Collisions (%) by County",
+        pct_minor: "Minor Injury Collisions (%) by County",
+        pct_property: "Property Damage Only (%) by County",
+        pct_unknown: "Unknown Injury Collisions (%) by County",
         Col_per_licDR: "Collision Rate per 10,000 licensed drivers",
         fatal_perLicDr: "Fatality Rate per 10,000 licensed drivers",
         serious_injry_perLicDr: "Serious Injury Rate per 10,000 licensed drivers"
@@ -69,10 +69,10 @@
     
         //create Albers equal area conic projection centered on Washington
         var projection = d3.geoAlbers()
-            .center([0, 47.24])
+            .center([0, 47.55])
             .rotate([120.30, 0, 0])
             .parallels([45.0, 47.0])
-            .scale(6000)
+            .scale(6500)
             .translate([width / 2, height / 2]);
     
         var path = d3.geoPath()
@@ -117,11 +117,11 @@
     //function to create color scale generator
     function makeColorScale(data){
         var colorClasses = [
-            "#D3E7D6",
-            "#95DA9B",
-            "#40bf80",
-            "#007D50",
-            "#003D27"
+            "#c0dee7",
+            "#5ec0df",
+            "#4690A7",
+            "#254B57",
+            "#0B2F3B"
         ];
 
         //create color scale generator
@@ -239,8 +239,8 @@
 
         //create a text element for the chart title
         var chartTitle = chart.append("text")
-            .attr("x", 40)
-            .attr("y", 40)
+            .attr("x", 100)
+            .attr("y", 20)
             .attr("class", "chartTitle")
             
 
@@ -362,7 +362,7 @@
             });
         //text to chart title
         var chartTitle = d3.select(".chartTitle")
-            .text(attrName[expressed] + " in each county");
+            .text(attrDesc[expressed]);
         
         //update the chart axis
         var yAxis = d3.axisLeft()
@@ -376,8 +376,8 @@
     function highlight(props){
         //change stroke
         var selected = d3.selectAll("." + props.JURISDIC)
-            .style("stroke", "blue")
-            .style("stroke-width", "2");
+            .style("stroke", "white")
+            .style("stroke-width", "2.5");
         setLabel(props);
     };
     
