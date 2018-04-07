@@ -45,7 +45,7 @@
         
     //create a scale to size bars proportionally to frame and for axis
     var yScale = d3.scaleLinear()
-        .range([chartHeight-10, 0])
+        .range([chartHeight-11, 0])
         .domain([0, 420]);
     
 
@@ -117,11 +117,11 @@
     //function to create color scale generator
     function makeColorScale(data){
         var colorClasses = [
-            "#D4B9DA",
-            "#C994C7",
-            "#DF65B0",
-            "#DD1C77",
-            "#980043"
+            "#D3E7D6",
+            "#95DA9B",
+            "#40bf80",
+            "#007D50",
+            "#003D27"
         ];
 
         //create color scale generator
@@ -325,10 +325,16 @@
             return + parseFloat(d[expressed])
         });
         
-        //set reset yScale
-        yScale = d3.scaleLinear()
-            .range([450, 0])
-            .domain([0, Math.ceil(max)]);
+        //set reset yScale adjust max for some attributes
+        if (expressed == attrArray[0]){
+            yScale = d3.scaleLinear()
+                .range([chartHeight-11,0])
+                .domain([0,max+800]);
+        }else{yScale = d3.scaleLinear()
+            .range([chartHeight-11, 0])
+            .domain([0, Math.ceil(max)]); //return the max domain to the next interger
+        }
+        
         
         //rescale(csvData);
         
