@@ -35,8 +35,8 @@
     
     //chart frame dimensions
     var chartWidth = window.innerWidth * 0.425,
-        chartHeight = 463,
-        leftPadding = 25,
+        chartHeight = 460,
+        leftPadding = 35,
         rightPadding = 2,
         topBottomPadding = 5,
         chartInnerWidth = chartWidth - leftPadding - rightPadding,
@@ -45,8 +45,8 @@
         
     //create a scale to size bars proportionally to frame and for axis
     var yScale = d3.scaleLinear()
-        .range([453, 0])
-        .domain([0, 450]);
+        .range([chartHeight-10, 0])
+        .domain([0, 420]);
     
 
     //begin script when window loads
@@ -87,7 +87,7 @@
         function callback(error, csvData, washington){
 
             //place graticule on the map
-            setGraticule(map,path);
+            //setGraticule(map,path);
         
         
             //translate washington TopoJSON
@@ -320,6 +320,18 @@
             })
             .duration(500);
         
+        //get the max value for the selected attribute
+        var max = d3.max(csvData, function(d){
+            return + parseFloat(d[expressed])
+        });
+        
+        //set reset yScale
+        yScale = d3.scaleLinear()
+            .range([450, 0])
+            .domain([0, Math.ceil(max)]);
+        
+        //rescale(csvData);
+        
         //call updatechart function to change bars, and colors
         updateChart(bars, csvData.length, colorScale);
     };
@@ -333,7 +345,7 @@
             })
             //size/resize bars
             .attr("height", function(d, i){
-                return 453 - yScale(parseFloat(d[expressed]));
+                return 450 - yScale(parseFloat(d[expressed]));
             })
             .attr("y", function(d, i){
                 return yScale(parseFloat(d[expressed])) + topBottomPadding;
@@ -344,7 +356,14 @@
             });
         //text to chart title
         var chartTitle = d3.select(".chartTitle")
-            .text("Number of Variable " + expressed[0] + " in each region");
+            .text(attrName[expressed] + " in each county");
+        
+        //update the chart axis
+        var yAxis = d3.axisLeft()
+            .scale(yScale)
+
+        d3.selectAll("g.axis")
+            .call(yAxis);
     };
     
      //function to highlight enumeration units and bars
@@ -427,7 +446,7 @@
 
         var regionName = infolabel.append("div")
             .attr("class", "labelname")
-            .html(props.name);
+            .html(props.JURISDIC_2);
     };
     
     //function to move info label with mouse
@@ -453,5 +472,6 @@
             .style("left", x + "px")
             .style("top", y + "px");
     };
+    
     
 })();
