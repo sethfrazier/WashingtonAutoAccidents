@@ -2,12 +2,31 @@ html,
 body{
     height: 100%;
     margin: 0;
+    overflow: hidden;
 }
 
 body{
     background: #007d50;
     font-family: serif;
+    color: #f8dc00;
     padding: 5px;
+}
+
+a{
+    color: #5ec0df;
+}
+
+.title h1{
+    margin: 0 40px;
+    font-size: 40px;
+}
+
+.subtitle h2{
+    margin: 0 40px;
+}
+
+.footer{
+    margin-left: 40px;
 }
 
 .map{
@@ -35,7 +54,7 @@ body{
     /*background-color: rgba(128,128,128,.2);
     border: medium solid #999;*/
     float: right;
-    margin: 7px 20px 0 0;
+    margin: 7px 50px 0 0;
 }
 
 .chartBackground{
@@ -72,13 +91,13 @@ body{
 
 .axis text{
     font-family: serif;
-    font-size: 1em;
+    font-size: 1.1em;
     fill: #f8dc00;
 }
 
 .dropdown{
     position: absolute;
-    top: 30px;
+    top: 135px;
     left: 40px;
     z-index: 10;
     font-family: serif;
@@ -86,7 +105,7 @@ body{
     font-weight: bold;
     padding; 2px;
     border: 1px solid #999;
-    box-shadow: 2px 2px 4px #999;
+    box-shadow: 1px 1px 1px #999;
 }
 
 option{
@@ -95,16 +114,16 @@ option{
 
 .infolabel{
     position: absolute;
-    height: 50px;
+    height: 70px;
     min-width: 100px;
     color: green;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.85);
     border: solid thin #fff;
     padding: 5px 10px;
     top: -75px;
 }
 
-.infolabel h1{
+.infolabel h2{
     margin: 0 20px 0 0;
     padding: 0;
     display: inline-block;

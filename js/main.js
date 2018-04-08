@@ -2,15 +2,14 @@
 (function(){
     
     //variables for data join
-    var attrArray = ["total_collisions", "pct_WaTotal", "pct_fatal", "pct_serious", "pct_minor","pct_property", "pct_unknown", "Col_per_licDR", "fatal_perLicDr", "serious_injry_perLicDr" ];
+    var attrArray = ["total_collisions", "pct_fatal", "pct_serious", "pct_minor","pct_property", "pct_unknown", "Col_per_licDR", "fatal_perLicDr", "serious_injry_perLicDr" ];
     
     var attrName = {
-        total_collisions: "Total Collisions",
-        pct_WaTotal: "County percentage of State", 
+        total_collisions: "Total Collisions", 
         pct_fatal: "Percent Fatal", 
         pct_serious: "Percent Serious Injury",
         pct_minor: "Percent Minor Injury",
-        pct_property: "Percent Property",
+        pct_property: "Percent Property Damage",
         pct_unknown: "Percent Unknown",
         Col_per_licDR: "Collision Rate",
         fatal_perLicDr: "Fatality Rate",
@@ -18,8 +17,7 @@
     }
     
     var attrDesc = {
-        total_collisions: "Total Collisions by County",
-        pct_WaTotal: "County percentage of State Total Collisions", 
+        total_collisions: "Total Collisions by County", 
         pct_fatal: "Fatal Collisions (%) by County", 
         pct_serious: "Serious Injury Collisions (%) by County",
         pct_minor: "Minor Injury Collisions (%) by County",
@@ -31,12 +29,12 @@
     }
     
     
-    var expressed = attrArray[7]; //initial attribute
+    var expressed = attrArray[6]; //initial attribute
     
     //chart frame dimensions
     var chartWidth = window.innerWidth * 0.425,
         chartHeight = 460,
-        leftPadding = 35,
+        leftPadding = 40,
         rightPadding = 2,
         topBottomPadding = 5,
         chartInnerWidth = chartWidth - leftPadding - rightPadding,
@@ -58,10 +56,10 @@
      
         //map frame dimensions
         var width = window.innerWidth * 0.5,
-            height = 460;
+            height = 500;
     
         //create new svg container for the map
-        var map = d3.select("body")
+        var map = d3.select(".mainContainer")
             .append("svg")
             .attr("class", "map")
             .attr("width", width)
@@ -69,10 +67,10 @@
     
         //create Albers equal area conic projection centered on Washington
         var projection = d3.geoAlbers()
-            .center([0, 47.55])
-            .rotate([120.30, 0, 0])
+            .center([0, 47.25])
+            .rotate([121.0, 0, 0])
             .parallels([45.0, 47.0])
-            .scale(6500)
+            .scale(7000)
             .translate([width / 2, height / 2]);
     
         var path = d3.geoPath()
@@ -174,9 +172,9 @@
     };
 
     function joinData(washingtonCounties, csvData){
-        //loop through csv to assign each set of csv attribute values to geojson region
+        //loop through csv to assign each set of csv attribute values to geojson county
             for (var i=0; i<csvData.length; i++){
-                var csvCounty = csvData[i]; //the current region
+                var csvCounty = csvData[i]; //the current county
                 var csvKey = csvCounty.JURISDIC; //the CSV primary key
 
                 //loop through geojson counties to find correct county
@@ -204,7 +202,7 @@
     function setChart(csvData, colorScale){
         
         //create a second svg element to hold the bar chart
-        var chart = d3.select("body")
+        var chart = d3.select(".mainContainer") 
             .append("svg")
             .attr("width", chartWidth)
             .attr("height", chartHeight)
@@ -369,6 +367,7 @@
             .scale(yScale)
 
         d3.selectAll("g.axis")
+            .transition().duration(1500)//slow down the change in the y axis
             .call(yAxis);
     };
     
@@ -376,8 +375,8 @@
     function highlight(props){
         //change stroke
         var selected = d3.selectAll("." + props.JURISDIC)
-            .style("stroke", "white")
-            .style("stroke-width", "2.5");
+            .style("stroke", "#f8dc00")
+            .style("stroke-width", "2.75");
         setLabel(props);
     };
     
@@ -440,8 +439,12 @@
     //function to create dynamic label
     function setLabel(props){
         //label content
-        var labelAttribute = "<h1>" + props[expressed] +
-            "</h1><b>" + expressed + "</b>";
+        if (props[expressed]>0){
+        var labelAttribute = "<h2>" + props[expressed] +
+            "</h2><br><b>" + attrName[expressed] + "</b>";
+        }else{
+            var labelAttribute = "<h2>"+"No Data"+"</h2><br><b>"+attrName[expressed]+"</b>";
+        };
 
         //create info label div
         var infolabel = d3.select("body")
@@ -450,11 +453,12 @@
             .attr("id", props.JURISDIC + "_label")
             .html(labelAttribute);
 
-        var regionName = infolabel.append("div")
+        var countyName = infolabel.append("div")
             .attr("class", "labelname")
             .html(props.JURISDIC_2);
+         console.log(countyName);
     };
-    
+   
     //function to move info label with mouse
     function moveLabel(){
         //get width of label
@@ -478,6 +482,5 @@
             .style("left", x + "px")
             .style("top", y + "px");
     };
-    
     
 })();
