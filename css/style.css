@@ -6,18 +6,19 @@ body{
 
 body{
     background: #007d50;
-    font-family: serif;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     color: #f8dc00;
     padding: 5px;
 }
 
 a{
-    color: #5ec0df;
+    color: #c0dee7;
 }
 
 .title h1{
     margin: 0 40px;
     font-size: 40px;
+
 }
 
 .subtitle h2{
@@ -26,17 +27,12 @@ a{
 
 .footer{
     margin-left: 40px;
+    font-size: 14px;
 }
 
 .map{
     border: none;
     margin: 10px 0 0 20px;
-}
-
-.gratLines{
-    fill: none;
-    stroke: #999;
-    stroke-width: 1px;
 }
 
 .gratBackground{
@@ -45,7 +41,7 @@ a{
 
 .counties{
     stroke: black;
-    stroke-width: .5px;
+    stroke-width: .4px;
     stroke-linecap: round;
 }
 
@@ -62,14 +58,14 @@ a{
 
 .numbers{
     fill: white;
-    font-family: sans-serif;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     font-size: 12px; 
 }
 
 .chartTitle{
     fill: #f8dc00;
-    font-family: serif;
-    font-size: 1.25em;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: 1.55em;
     font-weight: bold;
 }
 
@@ -89,7 +85,7 @@ a{
 }
 
 .axis text{
-    font-family: serif;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     font-size: 1.1em;
     fill: #f8dc00;
 }
@@ -99,7 +95,7 @@ a{
     top: 135px;
     left: 40px;
     z-index: 10;
-    font-family: serif;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     font-size: 1em;
     font-weight: bold;
     padding; 2px;
@@ -115,7 +111,7 @@ option{
     position: absolute;
     height: 70px;
     min-width: 100px;
-    color: green;
+    color: #003300;
     background-color: rgba(255, 255, 255, 0.85);
     border: solid thin #fff;
     padding: 5px 10px;
