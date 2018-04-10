@@ -443,7 +443,7 @@
         
         //use coordinates of mousemove event to set label coordinates
         var x1 = d3.event.clientX + 10,
-            y1 = d3.event.clientY - 75,
+            y1 = d3.event.clientY - 85,
             x2 = d3.event.clientX-labelWidth-10,
             y2 = d3.event.clientY + 25;
         
