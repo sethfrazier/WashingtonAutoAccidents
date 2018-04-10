@@ -4,6 +4,7 @@
     //variables for data join
     var attrArray = ["total_collisions", "pct_fatal", "pct_serious", "pct_minor","pct_property", "pct_unknown", "Col_per_licDR", "fatal_perLicDr", "serious_injry_perLicDr" ];
     
+    //attribute variables
     var attrName = {
         total_collisions: "Total Collisions", 
         pct_fatal: "Percent Fatal", 
@@ -53,7 +54,6 @@
     //set up cloropleth map
     function setMap(){
     
-     
         //map frame dimensions
         var width = window.innerWidth * 0.5,
             height = 600;
@@ -83,10 +83,6 @@
             .await(callback);
 
         function callback(error, csvData, washington){
-
-            //place graticule on the map
-            //setGraticule(map,path);
-        
         
             //translate washington TopoJSON
             var washingtonCounties = topojson.feature(washington, washington.objects.WashingtonCountyBoundaries).features;
@@ -149,26 +145,6 @@
         } else {
             return "black";
         };
-    };
-
-    function setGraticule(map, path){
-        //create graticule generator
-        var graticule = d3.geoGraticule().step([1,1]); //place graticule lines every 5 degrees of longitude and latitude
-
-        //create graticule background
-        var gratBackground = map.append("path")
-            .datum(graticule.outline()) //bind graticule background
-            .attr("class", "gratBackground") //assign class for styling
-            .attr("d", path) //project graticule
-
-        //create graticule lines
-            var gratLines = map.selectAll(".gratLines") //select graticule elements that will be created
-                .data(graticule.lines()) //bind graticule lines to each element to be created
-                .enter() //create an element for each datum
-                .append("path") //append each element to the svg as a path element
-                .attr("class", "gratLines") //assign class for styling
-                .attr("d", path); //project graticule lines
-
     };
 
     function joinData(washingtonCounties, csvData){
@@ -334,8 +310,6 @@
         }
         
         
-        //rescale(csvData);
-        
         //call updatechart function to change bars, and colors
         updateChart(bars, csvData.length, colorScale);
     };
@@ -367,7 +341,7 @@
             .scale(yScale)
 
         d3.selectAll("g.axis")
-            .transition().duration(1500)//slow down the change in the y axis
+            .transition().duration(1500)//slow down and anamate the change in the y axis
             .call(yAxis);
     };
     

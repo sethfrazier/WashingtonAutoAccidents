@@ -1,3 +1,6 @@
+/*style By: Seth Frazier*/
+
+/*general body styles*/
 html,
 body{
     height: 100%;
@@ -30,13 +33,10 @@ a{
     font-size: 14px;
 }
 
+/*map style*/
 .map{
     border: none;
     margin: 10px 0 0 20px;
-}
-
-.gratBackground{
-    fill: #D5E3FF;
 }
 
 .counties{
@@ -45,6 +45,7 @@ a{
     stroke-linecap: round;
 }
 
+/*chart style*/
 .chart{
     /*background-color: rgba(128,128,128,.2);
     border: medium solid #999;*/
@@ -90,6 +91,7 @@ a{
     fill: #f8dc00;
 }
 
+/*dropdown style*/
 .dropdown{
     position: absolute;
     top: 135px;
@@ -107,6 +109,7 @@ option{
     font-weight: normal;
 }
 
+/*label style*/
 .infolabel{
     position: absolute;
     height: 70px;
